@@ -20,7 +20,9 @@ function s:Disable()
 endfunction
 
 function s:Enable()
-    autocmd Session BufAdd,BufDelete,BufWritePost * :call SessionSave()
+    augroup Session
+        autocmd BufReadPost,BufWritePost * :call s:Save()
+    augroup END
 endfunction
 
 if !exists(":SessionSave")
