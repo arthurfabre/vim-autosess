@@ -9,6 +9,11 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 
+" Autocmd events to update the session on
+" BufNewFile,BufReadPost instead of BufAdd, as BufAdd happens before new buffer becomes current
+let g:autosess#events = get(g:, 'autosess#events', "BufNewFile,BufReadPost,BufDelete,BufWritePost")
+
+
 function s:Save()
     " No active session
     if !strlen(v:this_session)
@@ -29,9 +34,7 @@ endfunction
 
 function s:Enable()
     augroup Session
-        " BufNewFile,BufReadPost instead of BufAdd, as BufAdd happens before
-        " new buffer becomes current
-        autocmd BufNewFile,BufReadPost,BufDelete,BufWritePost * :call s:Save()
+        execute "autocmd ".g:autosess#events." * :call s:Save()"
     augroup END
 endfunction
 
