@@ -29,9 +29,12 @@ endfunction
 
 function s:Enable()
     augroup Session
-        autocmd BufReadPost,BufWritePost * :call s:Save()
+        " BufNewFile,BufReadPost instead of BufAdd, as BufAdd happens before
+        " new buffer becomes current
+        autocmd BufNewFile,BufReadPost,BufDelete,BufWritePost * :call s:Save()
     augroup END
 endfunction
+
 
 if !exists(":SessionSave")
     command SessionSave :call s:Save()
