@@ -10,9 +10,17 @@ set cpo&vim
 
 
 function s:Save()
-    if strlen(v:this_session)
-        execute "mksession! ".v:this_session
+    " No active session
+    if !strlen(v:this_session)
+        return
     endif
+
+    " If we're loading a session right now, don't overwrite it
+    if exists("g:SessionLoad")
+        return
+    endif
+
+    execute "mksession! ".v:this_session
 endfunction
 
 function s:Disable()
