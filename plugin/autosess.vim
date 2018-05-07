@@ -48,6 +48,7 @@ if !exists(":SessionEnable")
     command SessionEnable :call s:Enable()
 endif
 
+SessionEnable
 
 " Restore line continuation
 let &cpo = s:save_cpo
