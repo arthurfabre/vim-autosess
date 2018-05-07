@@ -11,7 +11,7 @@ set cpo&vim
 
 function s:Save()
     if strlen(v:this_session)
-        mksession! v:this_session
+        execute "mksession! ".v:this_session
     endif
 endfunction
 
