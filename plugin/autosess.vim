@@ -1,5 +1,5 @@
 " Ensure we're only loaded once
-if exists("g:loaded_autosess")
+if exists("g:loaded_autosess") && g:loaded_autosess
     finish
 endif
 let g:loaded_autosess = 1
